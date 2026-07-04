@@ -1,6 +1,6 @@
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import Card from "../components/Card.jsx";
+import CharacterCard from "../components/CharacterCard.jsx";
 import { useEffect, useState } from "react";
 
 export const Home = () => {
@@ -24,7 +24,7 @@ export const Home = () => {
 			<div className="row flex-nowrap overflow-x-auto">{/* Characters */}
 				{store.characters.map((character,index)=>{
 					return(
-						<Card key={character.uid} character={character}/>
+						<CharacterCard key={character.uid} character={character}/>
 					)
 				})}
 			</div>
