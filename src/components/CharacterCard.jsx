@@ -30,14 +30,14 @@ const CharacterCard = ({ character }) => {
                         Eye Color: {details?.eye_color}<br />
                     </p>
                     <div className='d-flex justify-content-between'>
-                        <Link to={`/learnmore/characters/${character.uid}`} className="btn btn-primary">Learn more! </Link>
+                        <Link to={`/learnmore/characters/${character.uid}`} className="btn btn-outline-primary">Learn more! </Link>
                         <button onClick={() => {
                             if (isFavorite) {
                                 dispatch({ type: "remove_favorite", payload:{ ...character, category: "people" } });
                             } else {
                                 dispatch({ type: "add_favorite", payload: { ...character, category: "people" } });
                             }
-                        }} className='btn'><i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i></button>
+                        }} className='btn btn-outline-warning'><i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i></button>
                     </div>
                 </div>
             </div>
