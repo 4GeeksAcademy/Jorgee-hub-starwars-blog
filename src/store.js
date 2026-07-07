@@ -23,7 +23,7 @@ export default function storeReducer(store, action = {}) {
     case 'remove_favorite':
       return{
         ...store,
-        favorites: store.favorites.filter((fav) => fav.uid !== action.payload.uid)
+        favorites: store.favorites.filter((fav) => !(fav.uid === action.payload.uid && fav.category === action.payload.category))
       };
     case 'add_planet':
       return {

@@ -6,13 +6,13 @@ const PlanetCard = ({ planet }) => {
     const { store, dispatch } = useGlobalReducer()
     console.log(planet);
     const [planetDetails, setPlanetDetails] = useState()
-    const isFavorite = store.favorites.some((fav) => fav.uid === planet.uid);
+    const isFavorite = store.favorites.some((fav) => fav.uid === planet.uid && fav.category === "planets");
     console.log(planetDetails);
     const getPlanetDetails = async () => {
         try {
             const response = await fetch(`${planet.url}`)
             const data = await response.json();
-            setPlanet(data.result.properties);
+            setPlanetDetails(data.result.properties);
         } catch (error) {
             console.log(error);
         }
@@ -33,9 +33,9 @@ const PlanetCard = ({ planet }) => {
                         <Link to="#" className="btn btn-primary">Learn more! </Link>
                         <button onClick={() => {
                             if (isFavorite) {
-                                dispatch({ type: "remove_favorite", payload: planet });
+                                dispatch({ type: "remove_favorite", payload: { ...planet, category: "planets" } });
                             } else {
-                                dispatch({ type: "add_favorite", payload: planet });
+                                dispatch({ type: "add_favorite", payload: { ...planet, category: "planets" } });
                             }
                         }} className='btn'><i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i></button>
                     </div>

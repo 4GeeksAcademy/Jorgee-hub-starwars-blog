@@ -2,11 +2,12 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
+import PlanetCard from './PlanetCard';
 const CharacterCard = ({ character }) => {
     const { store, dispatch } = useGlobalReducer()
     console.log(character);
     const [details, setDetails] = useState()
-    const isFavorite = store.favorites.some((fav) => fav.uid === character.uid);
+    const isFavorite = store.favorites.some((fav) => fav.uid === character.uid && fav.category === "people");
     console.log(details);
     const getCharacterDetails = async () => {
         try {
@@ -33,11 +34,13 @@ const CharacterCard = ({ character }) => {
                     </p>
                     <div className='d-flex justify-content-between'>
                         <Link to="#" className="btn btn-primary">Learn more! </Link>
-                        <button onClick={() =>{if (isFavorite) {
-                            dispatch({type: "remove_favorite", payload: character});
-                        } else {
-                            dispatch({type: "add_favorite", payload: character});
-                        } } } className='btn'><i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i></button>
+                        <button onClick={() => {
+                            if (isFavorite) {
+                                dispatch({ type: "remove_favorite", payload:{ ...character, category: "people" } });
+                            } else {
+                                dispatch({ type: "add_favorite", payload: { ...character, category: "people" } });
+                            }
+                        }} className='btn'><i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i></button>
                     </div>
                 </div>
             </div>
