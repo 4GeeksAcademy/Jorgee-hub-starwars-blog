@@ -2,25 +2,22 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import useGlobalReducer from '../hooks/useGlobalReducer';
-import PlanetCard from './PlanetCard';
 const CharacterCard = ({ character }) => {
     const { store, dispatch } = useGlobalReducer()
-    console.log(character);
-    const [details, setDetails] = useState()
+    const [details, setDetails] = useState(null)
     const isFavorite = store.favorites.some((fav) => fav.uid === character.uid && fav.category === "people");
-    console.log(details);
     const getCharacterDetails = async () => {
         try {
-            const response = await fetch(`${character.url}`)
+            const response = await fetch(character.url)
             const data = await response.json();
             setDetails(data.result.properties);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         }
     }
     useEffect(() => {
         getCharacterDetails();
-    }, [])
+    }, [character.url])
     return (
         <div className='col-auto'>
             <div className="card flex-shrink-0" style={{ width: "18rem" }}>
@@ -33,7 +30,7 @@ const CharacterCard = ({ character }) => {
                         Eye Color: {details?.eye_color}<br />
                     </p>
                     <div className='d-flex justify-content-between'>
-                        <Link to="#" className="btn btn-primary">Learn more! </Link>
+                        <Link to={`/learnmore/characters/${character.uid}`} className="btn btn-primary">Learn more! </Link>
                         <button onClick={() => {
                             if (isFavorite) {
                                 dispatch({ type: "remove_favorite", payload:{ ...character, category: "people" } });
