@@ -39,7 +39,7 @@ const PlanetCard = ({ planet }) => {
 
                     <div className='d-flex justify-content-between align-items-center'>
                         
-                        <Link to={`/learnmore/planets/${planet.uid}`} className="btn btn-primary">
+                        <Link to={`/learnmore/planets/${planet.uid}`} className="btn btn-outline-primary">
                             Learn more!
                         </Link>
 
@@ -49,7 +49,7 @@ const PlanetCard = ({ planet }) => {
                             } else {
                                 dispatch({ type: "add_favorite", payload: { ...planet, category: "planets" } });
                             }
-                        }} className='btn'>
+                        }} className='btn btn-outline-warning'>
                             <i className={isFavorite ? "fa-solid fa-heart" : "fa-regular fa-heart"}></i>
                         </button>
                     </div>
