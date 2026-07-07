@@ -7,7 +7,7 @@ export const Navbar = () => {
 		<nav className="navbar navbar-light bg-light">
 			<div className="container">
 				<Link to="/">
-					<span className="navbar-brand mb-0 h1">Star wars</span>
+					<span className="text-dark h1 mb-0 fw-bold">Star Wars</span>
 				</Link>
 				<div className="ml-auto">
 					<div className="dropdown">
